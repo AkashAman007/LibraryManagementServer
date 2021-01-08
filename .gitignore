@@ -1,0 +1,8 @@
+/.vscode/
+/node_modules/
+*.log
+/built/
+/logs/
+.nyc*
+coverage/*
+package-lock.json
