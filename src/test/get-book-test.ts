@@ -9,8 +9,7 @@ const url = "/api/library/books";
 const booksInTestData = 8;
 
 describe("Library Controller getAll Books API", () => {
-    const server = startTestServer();
-    const app = server.build();
+    const app = startTestServer();
     beforeEach(async () => {
         await setupTestData("./library-test-data.sql");
     });

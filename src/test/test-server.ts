@@ -4,11 +4,18 @@ import { ContainerConfigLoader } from "../common/container";
 import { DatabaseService } from "../common/db/database-service";
 import "../controllers/library-controller";
 
+let testServer: any;
+
 export const startTestServer = () => {
+    if (testServer) {
+        return testServer;
+    }
+    require("../controllers/library-controller");
     DatabaseService.initialize();
     const container = ContainerConfigLoader.Load();
     const server = new InversifyExpressServer(container, null, { rootPath: "/api" }, null);
     server.setConfig(appConfig)
           .setErrorConfig(errorConfig);
-    return server;
+    testServer = server.build();
+    return testServer;
 };
