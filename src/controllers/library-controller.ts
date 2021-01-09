@@ -48,6 +48,15 @@ export class LibraryController extends BaseHttpController {
 
     @httpPost("/books/return")
     public async returnBooks(req: Request, res: Response, next: NextFunction) {
-
+        req.params = _.extend(req.params || {}, req.query || {}, req.body || {});
+        req.assert("userId", "Invalid UserId").notEmpty().isInt();
+        req.assert("bookIds", "Invalid BookId").notEmpty().isArray();
+        const errors = req.validationErrors();
+        if (errors) {
+            throw new BusinessException(Constants.ERROR_CODE.BAD_REQUEST, `${JSON.stringify(errors)}`);
+        }
+        const bookIds = [...req.params.bookIds].map((bookId) => parseInt(bookId));
+        const response = await this.libraryService.returnBooks(parseInt(req.params.userId), bookIds);
+        return res.status(Constants.STATUS_CODE.SUCCESS).send(successResponse(response));
     }
 }

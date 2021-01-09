@@ -6,6 +6,7 @@ import { Constants } from "../common/constants";
 import { UserMapper } from "../mappers/user-mapper";
 import { BookModel } from "../models/book-model";
 import { UserBookModel } from "../models/user-book-model";
+const _ = require("lodash");
 
 @injectable()
 export class LibraryService {
@@ -44,6 +45,40 @@ export class LibraryService {
         this.checkBookBorrowingEligibility(borrowedBooks, book!);
         await this.libraryMapper.borrowBookForUser(userId, bookId, user.version);
         return { borrowed: bookId };
+    }
+
+    public async returnBooks(userId: number, bookIds: number[]) {
+        const user = await this.getUser(userId);
+        const [ borrowedBooks, booksToReturn] = await Promise.all([
+                this.libraryMapper.getBooksBorrowedByUserByIds(user.id, bookIds),
+                this.libraryMapper.getBooksByIds(bookIds),
+            ],
+        );
+        this.checkIfReturnIsValid(bookIds, borrowedBooks, booksToReturn);
+        await this.libraryMapper.returnBooksForUser(userId, bookIds, user.version);
+    }
+
+    private checkIfReturnIsValid(bookIds: number[], borrowedBooks: UserBookModel[], booksToReturn: BookModel[]) {
+        this.checkIfBooksToBeReturnedAreValid(bookIds, booksToReturn);
+        this.checkIfUserHasTheBookToBeReturned(bookIds, borrowedBooks);
+    }
+
+    private checkIfBooksToBeReturnedAreValid(bookIds: number[], availableBooks: BookModel[]) {
+        const availableBookIds = availableBooks.map((availableBook) => availableBook.id);
+        const isEqual = _.isEqual(bookIds.sort(), availableBookIds.sort());
+        if (!isEqual) {
+            throw new BusinessException(Constants.ERROR_CODE.RETURNED_BOOKS_ARE_INVALID,
+                 Constants.ERROR_MESSAGE.RETURNED_BOOKS_ARE_INVALID);
+        }
+    }
+
+    private checkIfUserHasTheBookToBeReturned(bookIds: number[], borrowedBooks: UserBookModel[]) {
+        const borrowedBookIds = borrowedBooks.map((borrowedBook) => borrowedBook.id);
+        const isEqual = _.isEqual(bookIds.sort(), borrowedBookIds.sort());
+        if (!isEqual) {
+            throw new BusinessException(Constants.ERROR_CODE.RETURNED_BOOKS_NOT_AVAILABLE_WITH_USER,
+                 Constants.ERROR_MESSAGE.RETURNED_BOOKS_NOT_AVAILABLE_WITH_USER);
+        }
     }
 
     private checkIfBookIsAvailaible(book: BookModel | null) {
