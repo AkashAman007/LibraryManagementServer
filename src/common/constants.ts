@@ -2,10 +2,12 @@ export class Constants {
 
     public static readonly ERROR_MESSAGE = {
         BAD_REQUEST: "Bad Request",
+        USER_NOT_FOUND: "User Not Found",
         INTERNAL_SERVER_ERROR: "Internal Server Error",
     };
 
     public static readonly ERROR_CODE = {
+        USER_NOT_FOUND: 1000,
         BAD_REQUEST: 400,
     };
 
