@@ -7,6 +7,8 @@ export class Constants {
         BOOK_NOT_AVAILABLE: "Book Requested Is Not Available",
         BORROW_LIMIT_REACHED: "Borrow Limit Reached",
         USER_ALREADY_HAS_BOOK: "User Already Has Book",
+        RETURNED_BOOKS_NOT_AVAILABLE_WITH_USER: "User Does Not Have Book To Be Returned",
+        RETURNED_BOOKS_ARE_INVALID: "Books To Be Returned Are Invalid",
     };
 
     public static readonly ERROR_CODE = {
@@ -14,6 +16,8 @@ export class Constants {
         BORROW_LIMIT_REACHED: 1001,
         USER_ALREADY_HAS_BOOK: 1002,
         BOOK_NOT_AVAILABLE: 1003,
+        RETURNED_BOOKS_NOT_AVAILABLE_WITH_USER: 1004,
+        RETURNED_BOOKS_ARE_INVALID: 1005,
         BAD_REQUEST: 400,
     };
 
