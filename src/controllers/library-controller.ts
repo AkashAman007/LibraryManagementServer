@@ -35,8 +35,15 @@ export class LibraryController extends BaseHttpController {
 
     @httpPost("/books/borrow")
     public async borrowBook(req: Request, res: Response, next: NextFunction) {
-
-
+        req.params = _.extend(req.params || {}, req.query || {}, req.body || {});
+        req.assert("userId", "Invalid UserId").notEmpty().isInt();
+        req.assert("bookId", "Invalid BookId").notEmpty().isInt();
+        const errors = req.validationErrors();
+        if (errors) {
+            throw new BusinessException(Constants.ERROR_CODE.BAD_REQUEST, `${JSON.stringify(errors)}`);
+        }
+        const response = await this.libraryService.borrowBook(parseInt(req.params.userId), parseInt(req.params.bookId));
+        return res.status(Constants.STATUS_CODE.SUCCESS).send(successResponse(response));
     }
 
     @httpPost("/books/return")
