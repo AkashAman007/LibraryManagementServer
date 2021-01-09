@@ -6,7 +6,7 @@
     "target": "es6",
     "strict": true,
     "module": "commonjs",
-    "types": ["reflect-metadata", "node"],
+    "types": ["reflect-metadata", "node","mocha"],
     "allowSyntheticDefaultImports": true,
     "esModuleInterop": true,
     "experimentalDecorators": true,
