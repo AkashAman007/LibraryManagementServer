@@ -19,6 +19,17 @@ export const markBooksReturnedInDbForUser = async (userId: number) => {
     return await executeQuery(query);
 };
 
+export const markBookAsUnavaiableInDb = async (bookId: number) => {
+    let query = "UPDATE `library_management`.`books` SET `available_qty` = '0' WHERE (`id` = ?)";
+    query = mysql.format(query, [bookId]);
+    return await executeQuery(query);
+};
+
+export const removeAllBorrowedBooksForUser = async () => {
+    const query = "TRUNCATE TABLE `library_management`.`books_borrowed`";
+    return await executeQuery(query);
+};
+
 const executeQuery = async (sql: string) => {
     return new DatabaseService().executeQuery(sql);
 };

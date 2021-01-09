@@ -2,7 +2,7 @@ import { expect } from "chai";
 import "reflect-metadata";
 import request from "supertest";
 import { Constants } from "../common/constants";
-import { deleteAllBooks, setupTestData } from "./test-db-utils";
+import { deleteAllBooks, setupTestData, markBookAsUnavaiableInDb } from "./test-db-utils";
 import { startTestServer } from "./test-server";
 
 const url = "/api/library/books";
@@ -65,6 +65,21 @@ describe("Library Controller getAll Books API", () => {
             const res = await request(app).get(url);
             const data = res.body.data;
             expect(data).to.be.an("array").to.have.lengthOf(0);
+        });
+    });
+
+    describe("c. Do not fetch book if the availableQty is 0", async () => {
+
+        it("1. Returns empty list of books", async () => {
+            const bookId = 1;
+            await markBookAsUnavaiableInDb(bookId);
+            const res = await request(app).get(url);
+            expect(res.status).equals(Constants.SUCCESS_CODE);
+            expect(res.body.code).equals(Constants.SUCCESS_CODE);
+            expect(res.body.status).equals(true);
+            const bookList = res.body.data;
+            const isBookPresent = bookList.some((book: any) => bookId === book.id);
+            expect(isBookPresent).to.be.false;
         });
     });
 
