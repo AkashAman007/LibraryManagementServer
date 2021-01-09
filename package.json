@@ -31,7 +31,9 @@
     "tslint-config-prettier": "^1.18.0"
   },
   "dependencies": {
+    "@types/cors": "^2.8.9",
     "body-parser": "^1.19.0",
+    "cors": "^2.8.5",
     "express": "^4.16.4",
     "express-validator": "^5.3.1",
     "inversify": "^5.0.5",

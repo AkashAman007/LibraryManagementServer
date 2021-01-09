@@ -5,6 +5,7 @@ import { TYPES } from "../common/fie-types";
 import { LibraryService } from "../services/library-service";
 import { Constants } from "../common/constants";
 import { successResponse } from "../common/response-helper";
+import { BusinessException } from "../common/exceptions/business-exception";
 const _ = require("lodash");
 
 @controller("/library")
@@ -22,7 +23,14 @@ export class LibraryController extends BaseHttpController {
 
     @httpGet("/books/user")
     public async getUserBorrowedBooks(req: Request, res: Response, next: NextFunction) {
-
+        req.params = _.extend(req.params || {}, req.query || {}, req.body || {});
+        req.assert("userId", "Invalid UserId").notEmpty().isInt();
+        const errors = req.validationErrors();
+        if (errors) {
+            throw new BusinessException(Constants.ERROR_CODE.BAD_REQUEST, `${JSON.stringify(errors)}`);
+        }
+        const response = await this.libraryService.getUserBorrowedBooks(parseInt(req.params.userId));
+        return res.status(Constants.STATUS_CODE.SUCCESS).send(successResponse(response));
     }
 
     @httpPost("/books/borrow")

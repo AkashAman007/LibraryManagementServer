@@ -12,4 +12,8 @@ VALUES
 ('8', '3246570', 'Harry Potter and the Cursed Child', 'JK Rowling', '7', '10', '1', 'https://imagesvc.meredithcorp.io/v3/mm/image?q=85&c=sc&poi=face&w=399&h=532&url=https%3A%2F%2Fstatic.onecms.io%2Fwp-content%2Fuploads%2Fsites%2F6%2F2016%2F09%2F9781408855669.jpg', 'The first novel in the Harry Potter series and Rowlings debut novel, it follows Harry Potter, a young wizard who discovers his magical heritage on his eleventh birthday, when he receives a letter of acceptance to Hogwarts School of Witchcraft and Wizardry.');
 
 TRUNCATE TABLE `library_management`.`users`;
-INSERT INTO `library_management`.`users` (`id`, `full_name`, `contact_number`, `books_borrowed`, `version`) VALUES ('2', 'Joe', '2342342323', '1', '78');
+INSERT INTO `library_management`.`users` (`id`, `full_name`, `contact_number`, `books_borrowed`, `version`) VALUES ('1', 'Joe', '2342342323', '1', '78');
+INSERT INTO `library_management`.`users` (`id`, `full_name`, `contact_number`, `books_borrowed`, `version`) VALUES ('2', 'Anne', '2342342323', '1', '78');
+
+TRUNCATE TABLE `library_management`.`books_borrowed`;
+INSERT INTO `library_management`.`books_borrowed` (`user_id`, `book_id`, `is_borrowed`) VALUES ('1', '1','1');

@@ -2,7 +2,6 @@ import { InversifyExpressServer } from "inversify-express-utils";
 import { appConfig, errorConfig } from "../app";
 import { ContainerConfigLoader } from "../common/container";
 import { DatabaseService } from "../common/db/database-service";
-import "../controllers/library-controller";
 
 let testServer: any;
 
