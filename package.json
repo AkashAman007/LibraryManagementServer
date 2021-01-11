@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "tsc && node ./built/index.js",
+    "start": "tsc && node ./build/index.js",
     "test": "nyc mocha --timeout 5000 --bail --require ts-node/register src/test/*.ts --exit && open ./coverage/index.html"
   },
   "author": "Akash Aman",
