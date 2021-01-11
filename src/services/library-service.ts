@@ -15,7 +15,7 @@ export class LibraryService {
                 @inject(TYPES.UserMapper) private userMapper: UserMapper) {}
 
     public async getAllBooks() {
-        const books = await this.libraryMapper.getAllBooks();
+        const books = await this.libraryMapper.getAvaialbleBooksInLibrary();
         return books;
     }
 
@@ -56,6 +56,7 @@ export class LibraryService {
         );
         this.checkIfReturnIsValid(bookIds, borrowedBooks, booksToReturn);
         await this.libraryMapper.returnBooksForUser(userId, bookIds, user.version);
+        return { booksReturned: bookIds };
     }
 
     private checkIfReturnIsValid(bookIds: number[], borrowedBooks: UserBookModel[], booksToReturn: BookModel[]) {

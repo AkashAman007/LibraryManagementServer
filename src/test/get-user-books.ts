@@ -15,7 +15,7 @@ describe("Library Controller getUser Books API", () => {
     const app = startTestServer();
 
     beforeEach(async () => {
-        await setupTestData("./library-test-data.sql");
+        await setupTestData("./scripts/library-test-data.sql");
     });
 
     describe("a. get user books validations", async () => {

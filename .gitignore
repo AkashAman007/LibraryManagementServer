@@ -4,5 +4,5 @@
 /built/
 /logs/
 .nyc*
-coverage/*
+/coverage/*
 package-lock.json

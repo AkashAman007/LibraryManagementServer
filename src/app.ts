@@ -2,11 +2,13 @@ import bodyParser from "body-parser";
 import expressValidator from "express-validator";
 import "reflect-metadata";
 import { logger } from "./common/logger";
+import cors from "cors";
 import { errorHandler } from "./common/middlewares/error-handler";
 
 const port = process.env.PORT || 7777;
 
 export const appConfig = (app: any) => {
+    app.use(cors());
     app.use(bodyParser.json({limit: "1mb"}));       // to support JSON-encoded bodies
 
     app.use(bodyParser.urlencoded({     // to support URL-encoded bodies

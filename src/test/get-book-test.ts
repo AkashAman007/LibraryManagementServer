@@ -11,7 +11,7 @@ const booksInTestData = 8;
 describe("Library Controller getAll Books API", () => {
     const app = startTestServer();
     beforeEach(async () => {
-        await setupTestData("./library-test-data.sql");
+        await setupTestData("./scripts/library-test-data.sql");
     });
 
     describe("a. Get all books", async () => {

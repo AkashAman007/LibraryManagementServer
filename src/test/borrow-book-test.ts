@@ -18,7 +18,7 @@ describe("Library Controller Borrow Books API", () => {
     const app = startTestServer();
 
     beforeEach(async () => {
-        await setupTestData("./library-test-data.sql");
+        await setupTestData("./scripts/library-test-data.sql");
         await removeAllBorrowedBooksForUser();
     });
 

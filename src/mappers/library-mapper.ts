@@ -11,7 +11,7 @@ export class LibraryMapper {
 
     constructor(@inject(TYPES.DatabaseService) private db: DatabaseService) {}
 
-    public async getAllBooks(): Promise<BookModel[]> {
+    public async getAvaialbleBooksInLibrary(): Promise<BookModel[]> {
         const query = "SELECT * from `library_management`.`books` WHERE available_qty > 0";
         const rows = await this.db.executeQuery(query);
         return this.getRows(BookModel, rows);
