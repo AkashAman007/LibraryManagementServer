@@ -59,6 +59,7 @@ This will run test and open code coverage to further investigate
 
 
 ## Project Structure
+All the classes are inside src/ folder
 - **controllers**\
 Classes that serves as request handler\
 Functions are decorated with releative route path\
@@ -86,6 +87,9 @@ Model classes holds result from database
   error-handler.ts is used to inspect Exception thrown and prepare response object in case of invalid operations
   - **other configuration files**\
 Other configuration files such as ContainerConfiguration, logger and utils such as constants and response-helper is kept here
+
+- **test**\
+Has all the test files for testing functionalities related to each api
 
 ## Database Design
 

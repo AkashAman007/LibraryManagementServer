@@ -232,7 +232,7 @@ describe("Library Controller Borrow Books API", () => {
         });
     });
 
-    describe("d. borrow wehn user owns copy of the book", async () => {
+    describe("d. borrow when user owns copy of the book", async () => {
 
         beforeEach(async () => {
             await removeAllBorrowedBooksForUser();
