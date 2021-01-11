@@ -12,7 +12,7 @@
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
 
-    "outDir": "./built"
+    "outDir": "./build"
   },
   "include": ["src"]
 }
