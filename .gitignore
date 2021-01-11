@@ -1,7 +1,7 @@
 /.vscode/
 /node_modules/
 *.log
-/built/
+/build/
 /logs/
 .nyc*
 /coverage/*
