@@ -17,4 +17,3 @@ INSERT INTO `library_management`.`users` (`id`, `full_name`, `contact_number`, `
 
 
 TRUNCATE TABLE `library_management`.`books_borrowed`;
-INSERT INTO `library_management`.`books_borrowed` (`user_id`, `book_id`, `is_borrowed`) VALUES ('1', '1','1');
